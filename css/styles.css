@@ -103,10 +103,11 @@
   /* color-1(#EA9010)
    * color-2(#343D35)
    * color-3(#FEF5E4)
+   	--color-3: hsla(39, 93%, 95%, 1);
    */
 	--color-1: hsla(35, 87%, 49%, 1);
 	--color-2: hsla(127, 8%, 22%, 1);
-	--color-3: hsla(39, 93%, 95%, 1);
+	--color-3: hsla(39, 93%, 85%, 1);
 
   /* theme color variations
    */
@@ -3200,7 +3201,7 @@ td:last-child {
 	/*background		: linear-gradient(to bottom, rgba(57, 29, 4, 0.9), rgba(61, 41, 1, 0.9));
 	background: linear-gradient(21deg,hsl(35, 97%, 12%) 40%, hsl(25, 38%, 26%) 100%);
 	background		: linear-gradient(to bottom, hsl(24, 38%, 14%) 2%, hsl(35, 97%, 12%) 40%);*/
-	background		: hsl(205deg 37.36% 27.97%) 40%;
+	background		: hsl(204.91deg 37.06% 28.04% / 88%) 40%;
 	height          : var(--header-height);
 	width           : 100%;
 	position        : fixed;
@@ -3576,7 +3577,7 @@ td:last-child {
  *
  *
  * ------------------------------------------------------------------- */
-.s-intro {
+.s-intro-renamed {
 	--content-padding-top   : max(15rem, 18vh);
 	--content-padding-bottom: 10.8rem;
 	--content-min-height    : calc(var(--vspace-1) * 27);
@@ -3590,6 +3591,20 @@ td:last-child {
 	position                : relative;
 }
 
+.s-intro-2
+{
+	--content-padding-top   : max(15rem, 18vh);
+	--content-padding-bottom: 10.8rem;
+	--content-min-height    : calc(var(--vspace-1) * 27);
+	z-index                 : 2;
+	width                   : 100%;
+	height                  : max(var(--content-min-height), 75vh);
+	background-color: #263f4d;
+		
+    background-image: url(../images/overlay1.png), url(../images/icicle-wedding-lights.jpg);
+    background-size: cover;
+}
+
 /* --------------------------------------------------------------------
  * ## intro content
  * -------------------------------------------------------------------- */
@@ -3600,11 +3615,13 @@ td:last-child {
 	padding-top   : var(--content-padding-top);
 	padding-bottom: var(--content-padding-bottom);
 	position      : relative;
+	
 }
 
 .s-intro__content-inner {
 	--col       : 16;
 	--grid-gap-v: var(--vspace-0_5);
+
 }
 
 .s-intro__content-text {
