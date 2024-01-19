@@ -3598,7 +3598,7 @@ td:last-child {
 	--content-min-height    : calc(var(--vspace-1) * 27);
 	z-index                 : 2;
 	width                   : 100%;
-	height                  : max(var(--content-min-height), 75vh);
+	/* height                  : max(var(--content-min-height), 75vh); */
 	background-color: #263f4d;
 		
     background-image: url(../images/overlay1.png), url(../images/icicle-wedding-lights.jpg);
@@ -3985,9 +3985,19 @@ td:last-child {
 .s-about .section-header {
 	z-index: 2;
 }
-
+@keyframes slide-right {
+	to {
+	  transform:translateX(0);
+	}
+  }
 .s-about .text-display-title {
 	color: var(--color-3);
+	
+	animation: 2s slide-right 2s forwards;
+    transform:translateX(-400%);
+	transition-delay: 1.6s;
+	transition-timing-function: cubic-bezier(0.28, 0.12, 0.22, 1);
+    transition-duration: 0.9s;
 }
 
 .s-about__content-imgbg {
