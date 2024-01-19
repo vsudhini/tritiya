@@ -3267,10 +3267,10 @@ td:last-child {
 .s-header__menu-links a {
 	display            : block;
 	font-family        : var(--font-1);
-	font-weight        : 400;
+	font-weight        : 500;
 	font-size          : 1.6rem;
 	line-height        : var(--vspace-1);
-	color              : var(--color-2-lightest);
+	color              : hsl(50.8deg 63.72% 42.16%);
 	padding            : 0 1.2rem;
 	transition-property: color, background-color;
 }
