@@ -3249,7 +3249,7 @@ td:last-child {
 	display        : flex;
 	flex           : 1 1 0%;
 	align-items    : center;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 
 .s-header__menu-links {
