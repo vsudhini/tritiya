@@ -3875,7 +3875,7 @@ td:last-child {
 	}
 
 	.s-intro__content-media {
-		grid-column: 4/-1;
+		grid-column: 4/-2;
 		grid-row   : 2;
 	}
 
