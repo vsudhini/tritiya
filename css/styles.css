@@ -3604,6 +3604,133 @@ td:last-child {
     background-image: url(../images/overlay1.png), url(../images/icicle-wedding-lights.jpg);
     background-size: cover;
 }
+.s-works{
+	/* padding-top: calc(6 * var(--space));
+    padding-bottom: calc(5.5 * var(--space)); */
+    background-color: white;
+}
+
+.folio-list {
+    /* margin-top: var(--vspace-2_5);
+    margin-bottom: var(--vspace-2); */
+}
+
+.folio-list .column {
+    margin-bottom : var(--vspace-1_25);
+}
+
+.folio-list .column:nth-child(2n+1) {
+    padding-right : calc(var(--gutter) + 1.6rem);
+}
+
+.folio-list .column:nth-child(2n+2) {
+    padding-left : calc(var(--gutter) + 1.6rem);
+}
+.folio-item__caption {
+    display : none;
+}
+/* thumbnail
+ */
+ .folio-item__thumb a {
+    display  : block;
+    position : relative;
+    overflow : hidden;
+}
+
+.folio-item__thumb a::before {
+    z-index          : 1;
+    content          : "";
+    display          : block;
+    background-color : rgba(0, 0, 0, 0.5);
+    opacity          : 0;
+    visibility       : hidden;
+    position         : absolute;
+    top              : 0;
+    left             : 0;
+    right            : 0;
+    bottom           : 0;
+    width            : 100%;
+    height           : 100%;
+    transition       : all, .5s;
+}
+
+.folio-item__thumb a::after {
+    z-index     : 1;
+    content     : "+";
+    text-align  : center;
+    font-family : var(--font-1);
+    font-weight : 300;
+    font-size   : 3rem;
+    color       : white;
+    display     : block;
+    height      : 3.2rem;
+    width       : 3.2rem;
+    line-height : 3.2rem;
+    margin-left : -1.6rem;
+    margin-top  : -3rem;
+    text-align  : center;
+    opacity     : 0;
+    visibility  : hidden;
+    transform   : scale(0.5);
+    transition  : all, 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+    position    : absolute;
+    left        : 50%;
+    top         : 50%;
+}
+
+.folio-item__thumb img {
+    vertical-align : bottom;
+    margin-bottom  : 0;
+    transition     : all, 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+}
+
+/* portfolio info
+ */
+.folio-item__info {
+    padding : var(--vspace-0_75) 0 var(--vspace-0_5);
+}
+
+.folio-item__title {
+    margin : 0;
+}
+
+.folio-item__meta {
+    font-family   : var(--font-1);
+    font-size     : var(--text-sm);
+    line-height   : 1.5;
+    margin-bottom : 0.2rem;
+    color         : var(--color-gray-8);
+}
+
+.folio-item__meta .project-link {
+    color  : var(--color-text);
+    margin : 0 .8rem;
+}
+
+.folio-item__meta .project-link:focus,
+.folio-item__meta .project-link:hover {
+    color : var(--color-1);
+}
+
+/* on hover
+ */
+.folio-item__thumb:hover .folio-item__thumb-link img {
+    transform : scale(1.05);
+}
+
+.folio-item__thumb:hover .folio-item__thumb-link::before {
+    opacity    : 1;
+    visibility : visible;
+}
+
+.folio-item__thumb:hover .folio-item__thumb-link::after {
+    opacity    : 1;
+    visibility : visible;
+    transform  : scale(1);
+}
 
 /* --------------------------------------------------------------------
  * ## intro content
@@ -4057,7 +4184,7 @@ td:last-child {
  * ------------------------------------------------------------------- */
 .s-expertise {
 	padding-top   : var(--vspace-6);
-	padding-bottom: var(--vspace-5);
+	padding-bottom: var(--vspace-2);
 }
 
 .s-expertise__content-main {
@@ -4774,3 +4901,75 @@ td:last-child {
 .contact-list li {
 	padding-left: 0;
 }
+
+.pswp-docs__home-gallery {
+    grid-gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 600px);
+    grid-template-rows: repeat(2, 400px);
+    position: relative;
+    width: 100%;
+}
+
+.pswp-docs__home-gallery .pswp-docs__home-gallery-item:first-child {
+    grid-row: span 2;
+}
+
+@media screen and (max-width: 500px) {
+	.s-works {
+		padding-top: var(--vspace-5);
+	}
+	.folio-item__thumb img{
+		width: 50%;
+	}
+
+} 
+@media screen and (max-width: 900px) {
+
+    .stack-on-900,
+    .block-stack-on-900>.column {
+        flex         : none;
+        width        : 100%;
+        margin-left  : 0;
+        margin-right : 0;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    .stack-on-700,
+    .block-stack-on-700>.column {
+        flex         : none;
+        width        : 100%;
+        margin-left  : 0;
+        margin-right : 0;
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .stack-on-550,
+    .block-stack-on-550>.column {
+        flex         : none;
+        width        : 100%;
+        margin-left  : 0;
+        margin-right : 0;
+    }
+}
+.block-lg-one-third>.column {
+    flex  : none;
+    width : 33.33333%;
+}
+
+.block-lg-one-half>.column {
+    flex  : none;
+    width : 50%;
+	grid-template-rows: 400px;
+}
+.image-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  	grid-template-rows: repeat(2, 1fr); /* Adjust the size as needed */
+	gap: 10px; /* Adjust the gap between grid items */
+  }
+  

@@ -142,6 +142,7 @@ Javascript Files:
  - MoveTo.js (https://github.com/hsnaydd/moveTo)
  - Prism.js (https://prismjs.com/)
  - Swiper JS (https://swiperjs.com/)
+ - PhotoSwipe (https://photoswipe.com/)
 
 -------------------------------------------------------------------------------------------------------
 
