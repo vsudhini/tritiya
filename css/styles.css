@@ -4917,10 +4917,11 @@ td:last-child {
 
 @media screen and (max-width: 500px) {
 	.s-works {
-		padding-top: var(--vspace-5);
+		/* padding-top: var(--vspace-5); */
+		padding-top: var(--vspace-1);
 	}
 	.folio-item__thumb img{
-		width: 50%;
+		/* width: 50%; */
 	}
 
 } 
