@@ -2868,7 +2868,7 @@ td:last-child {
 
 .social-list a:focus svg path,
 .social-list a:hover svg path {
-	fill: var(--color-3);
+	fill: var(--color-1);
 }
 
 .social-list svg {
