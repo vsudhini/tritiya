@@ -5083,7 +5083,97 @@ td:last-child {
     border-radius: 10px;
     text-decoration: none;
 }
-
 .event-type-item .learn-more:hover {
     background-color: var(--color-btn-primary)
+}
+
+
+/* --------------------------------------------------------------------
+ * ## contact form (modern card)
+ * -------------------------------------------------------------------- */
+.contact-form {
+  background: var(--color-3-light);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: var(--vspace-1_5);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.contact-form .form-field {
+  margin-bottom: var(--vspace-0_875);
+}
+
+.contact-form label {
+  display: block;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin-bottom: var(--vspace-0_25);
+  color: var(--color-text-dark);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--color-gray-5);
+  background: var(--color-white);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--color-1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-1) 15%, transparent);
+}
+
+.contact-form textarea { resize: vertical; }
+
+.contact-form input[type="checkbox"] {
+  accent-color: var(--color-1);
+  margin-right: .6rem;
+}
+
+.contact-form .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 1.1rem 1.6rem;
+  border-radius: 10px;
+}
+
+/* --------------------------------------------------------------------
+ * ## success popup as modal
+ * -------------------------------------------------------------------- */
+#modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 9000;
+}
+
+#contact-success {
+  z-index: 9010;
+}
+
+#contact-success.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(92%, 520px);
+  background: var(--color-success);
+  color: var(--color-success-content);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+#contact-success.modal p {
+  font-size: var(--text-md);
 }

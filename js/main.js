@@ -417,7 +417,6 @@
 
     }; // end ssBackToTop
 
-
     /* smoothscroll
      * ------------------------------------------------------ */
     const ssMoveTo = function () {
@@ -443,7 +442,7 @@
                 t -= 2;
                 return c / 2 * (t * t * t + 2) + b;
             }
-        }
+        };
 
         const triggers = document.querySelectorAll('.smoothscroll');
 
@@ -461,9 +460,191 @@
     }; // end ssMoveTo
 
 
+    /* inject contact form (for pages without static form)
+     * ------------------------------------------------------ */
+    const ssInjectContactForm = function () {
+
+        // find the empty right column on contact page
+        const rightCol = document.querySelector('.s-content .pagemain .column.xl-5.md-12.u-flexitem-x-right');
+        if (!rightCol) return;
+
+        // do nothing if form already exists
+        if (rightCol.querySelector('#contact-form')) return;
+
+        rightCol.innerHTML = `
+            <form id="contact-form" class="contact-form" novalidate>
+                <div class="form-field">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name">
+                </div>
+                <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="you@example.com">
+                </div>
+                <div class="form-field">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(###) ###-####">
+                </div>
+                <div class="form-field">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Tell us about your event..."></textarea>
+                </div>
+                <div class="form-field">
+                    <label>
+                        <input type="checkbox" id="sms-consent" name="sms_consent" required>
+                        By providing your phone number, you agree to receive a text message from Tritiya. Message and Data rates may apply, Message frequency varies. To stop receiving messages, reply 'STOP' at any time. For more information, reply 'HELP'. Privacy Policy <a href="privacy.html">Link</a> & Terms n Conditions <a href="terms.html">Link</a>.
+                    </label>
+                </div>
+                <div class="form-field">
+                    <button type="submit" class="btn btn--primary">Submit</button>
+                </div>
+            </form>
+            <div id="contact-success" class="alert-box" style="display:none; margin-top: 1rem;">
+                <p>Thank you for contacting Tritiya, our team will get in touch with you shortly</p>
+                <span class="alert-box__close">X</span>
+            </div>
+        `;
+
+        // Hide the left CTA column if present and center the form column
+        try {
+            const row = rightCol.closest('.row');
+            const leftCtaCol = row && row.querySelector('.contact-cta') ? row.querySelector('.contact-cta').closest('.column') : null;
+            if (leftCtaCol) {
+                leftCtaCol.style.display = 'none';
+            }
+            if (row) {
+                row.style.justifyContent = 'center';
+                row.style.alignItems = 'center';
+                row.style.minHeight = '70vh';
+            }
+            // make form column full width but constrained by CSS max-width
+            rightCol.style.flex = 'none';
+            rightCol.style.width = '100%';
+            rightCol.style.maxWidth = '720px';
+            rightCol.style.margin = '0 auto';
+
+            // Remove pagemedia section and set its image as background for the pagemain area
+            const pageMediaRow = document.querySelector('.s-pagecontent .pagemedia');
+            const pageMain = document.querySelector('.s-pagecontent .pagemain');
+            if (pageMediaRow && pageMain) {
+                const img = pageMediaRow.querySelector('img');
+                const bg = img ? (img.getAttribute('src') || img.currentSrc) : null;
+                if (bg) {
+                    const pageMainContainer = pageMain.closest('.row.width-narrower') || pageMain.closest('.row') || pageMain;
+                    if (pageMainContainer && pageMainContainer.style) {
+                        pageMainContainer.style.backgroundImage = `url('${bg}')`;
+                        pageMainContainer.style.backgroundSize = 'cover';
+                        pageMainContainer.style.backgroundPosition = 'center';
+                        pageMainContainer.style.borderRadius = '12px';
+                    }
+                }
+                // Hide the media row to avoid duplicate imagery
+                pageMediaRow.style.display = 'none';
+            }
+        } catch (e) { /* no-op */ }
+    }; // end ssInjectContactForm
+
+    /* contact form
+     * ------------------------------------------------------ */
+    const ssContactForm = function () {
+
+        const form = document.querySelector('#contact-form');
+        if (!form) return;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // HTML5 validation
+            if (!form.reportValidity()) return;
+
+            const consent = form.querySelector('#sms-consent');
+            if (consent && !consent.checked) {
+                consent.focus();
+                return;
+            }
+
+            // Show success as modal with overlay
+            const success = document.getElementById('contact-success');
+            if (success) {
+                let overlay = document.getElementById('modal-overlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'modal-overlay';
+                    document.body.appendChild(overlay);
+                }
+                success.classList.add('modal', 'alert-box', 'alert-box--success');
+                success.style.display = 'block';
+            } else {
+                alert("Thank you for contacting Tritiya, our team will get in touch with you shortly");
+            }
+
+            form.reset();
+        });
+
+        // allow closing success message if it has a close button
+        const closeBtn = document.querySelector('#contact-success .alert-box__close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                const box = document.getElementById('contact-success');
+                const overlay = document.getElementById('modal-overlay');
+                if (box) box.style.display = 'none';
+                if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            });
+        }
+
+    }; // end ssContactForm
+
+    /* ensure footer has legal links
+     * ------------------------------------------------------ */
+    const ssEnsureFooterLegalLinks = function () {
+        const list = document.querySelector('.s-footer__site-links .link-list');
+        if (!list) return;
+
+        const hasPrivacy = !!list.querySelector('a[href="privacy.html"]');
+        const hasTerms = !!list.querySelector('a[href="terms.html"]');
+
+        if (!hasPrivacy) {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = 'privacy.html';
+            a.textContent = 'Privacy Policy';
+            li.appendChild(a);
+            list.appendChild(li);
+        }
+
+        if (!hasTerms) {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = 'terms.html';
+            a.textContent = 'Terms & Conditions';
+            li.appendChild(a);
+            list.appendChild(li);
+        }
+    }; // end ssEnsureFooterLegalLinks
+
+    /* remove Elfsight (uses eval) to satisfy strict CSP
+     * ------------------------------------------------------ */
+    const ssRemoveElfsight = function () {
+        try {
+            // remove platform script tags before they execute
+            document.querySelectorAll('script[src*="static.elfsight.com/platform/platform.js"]').forEach(function (s) {
+                s.parentNode && s.parentNode.removeChild(s);
+            });
+            // remove widget containers
+            document.querySelectorAll('[class*="elfsight-app-"]').forEach(function (n) {
+                n.parentNode && n.parentNode.removeChild(n);
+            });
+        } catch (e) {
+            // no-op if not present
+        }
+    }; // end ssRemoveElfsight
+
     /* Initialize
      * ------------------------------------------------------ */
     (function ssInit() {
+
+        // remove CSP-incompatible third-party widgets before anything else
+        ssRemoveElfsight();
 
         ssPreloader();
         ssMobileMenu();
@@ -473,6 +654,9 @@
         ssAlertBoxes();
         ssMoveTo();
         ssAnimateOnScroll();
+        ssInjectContactForm();
+        ssContactForm();
+        ssEnsureFooterLegalLinks();
 
     })();
 
